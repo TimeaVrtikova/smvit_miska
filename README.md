@@ -12,7 +12,7 @@ Vývoj a výroba funkčného prototypu inteligentnej misky pre psa, ktorá autom
 ## 2. Motivácia a Počiatočný Návrh
 Primárnou motiváciou pre tento projekt bola praktická potreba mojej sestry. Chcela pre svojho psa moderné a pohodlné riešenie, ktoré by zabezpečilo, že bude mať vždy prístup k čerstvej vode. Ako vizuálna inšpirácia poslúžila ružová miska v štýle "Hello Kitty".
 
-![Vizuálna inšpirácia](obrazky/inspiracia.jpg)
+<img src="obrazky/inspiracia.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 1: Požadovaný vizuálny štýl a inšpirácia pre projekt.*
 
 Na základe tejto predstavy som začala pracovať na vlastných nákresoch, kde som rozpracovala základný tvar misky, umiestnenie elektroniky, napájania (USB-C) a princíp fungovania.
