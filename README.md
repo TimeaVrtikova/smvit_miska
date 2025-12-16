@@ -81,7 +81,7 @@ Na základe nákresov a finálnych rozmerov elektroniky som vytvorila detailný 
 ### 4.5. Výsledný Produkt
 Po vytlačení všetkých častí a finálnej montáži elektroniky vznikol plne funkčný prototyp, ktorý spĺňa všetky pôvodné požiadavky.
 
-![Hotový a funkčný prototyp misky](obrazky/finalny-produkt.jpg)
+<img src="obrazky/finalny-produkt.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 8: Finálny produkt – funkčná automatická miska pripravená na použitie. (Sem vlož fotku reálneho produktu)*
 
 ## 5. Záver a Získané Skúsenosti
