@@ -9,48 +9,40 @@
 ## 1. Téma Projektu
 Vývoj a výroba funkčného prototypu inteligentnej misky pre psa, ktorá automaticky deteguje nízku hladinu vody a zabezpečí jej doplnenie. Projekt spája hardvér (mikrokontrolér Arduino a senzory), softvér (programovanie v C++), 3D modelovanie a 3D tlač do jedného funkčného celku.
 
-## 2. Motivácia a Východiskový Stav
-Primárnou motiváciou pre tento projekt bola praktická potreba mojej sestry. Chcela pre svojho psa moderné a pohodlné riešenie, ktoré by zabezpečilo, že bude mať vždy prístup k čerstvej vode, aj keď nikto nie je doma. Cieľom bolo vytvoriť produkt, ktorý by bol nielen funkčný, ale aj esteticky príjemný a zapadol do domácnosti. Ako predloha pre dizajn poslúžil jej vlastný nákres.
+## 2. Motivácia a Počiatočný Návrh
+Primárnou motiváciou pre tento projekt bola praktická potreba mojej sestry. Chcela pre svojho psa moderné a pohodlné riešenie, ktoré by zabezpečilo, že bude mať vždy prístup k čerstvej vode. Ako vizuálna inšpirácia poslúžila ružová miska v štýle "Hello Kitty".
 
-![Inšpirácia pre dizajn misky](obrazky/predloha_misky.jpg)
-*Obr. 1: Pôvodný nákres a vizuálna predstava od sestry.*
+![Vizuálna inšpirácia](obrazky/inspiracia.jpg)
+*Obr. 1: Požadovaný vizuálny štýl a inšpirácia pre projekt.*
+
+Na základe tejto predstavy som začala pracovať na vlastných nákresoch, kde som rozpracovala základný tvar misky, umiestnenie elektroniky, napájania (USB-C) a princíp fungovania.
+
+![Prvé nákresy a koncepty](obrazky/nakresy.jpg) ![Detailné nákresy pohľadov](obrazky/nakresy-detailne.jpg)
+*Obr. 2 a 3: Moje vlastné počiatočné nákresy a detailnejšie rozpracovanie dizajnu.*
 
 ## 3. Ciele Projektu
 Na začiatku projektu som si stanovila nasledujúce kľúčové ciele:
-*   **Automatizácia:** Systém musí byť schopný samostatne detegovať pokles hladiny vody pod určenú úroveň.
-*   **Funkčnosť:** Po detekcii nízkej hladiny musí systém automaticky aktivovať mechanizmus na doplnenie vody (napr. malé čerpadlo).
-*   **Bezpečnosť a Hygiena:** Miska musí byť vyrobená z materiálu, ktorý je bezpečný pre kontakt s potravinami a vodou (food-safe). Povrch musí byť hladký, aby sa zabránilo množeniu baktérií.
-*   **Samostatnosť:** Celé zariadenie má byť napájané z batérie, aby bolo prenosné a bezpečné.
+*   **Automatizácia:** Systém musí byť schopný samostatne detegovať pokles hladiny vody.
+*   **Funkčnosť:** Po detekcii nízkej hladiny musí systém automaticky aktivovať čerpadlo na doplnenie vody.
+*   **Bezpečnosť a Hygiena:** Miska musí byť vyrobená z materiálu bezpečného pre styk s potravinami (food-safe).
+*   **Samostatnosť:** Zariadenie má byť napájané z batérie, aby bolo prenosné a bezpečné.
 
-## 4. Roadmapa a Fázy Projektu
-Projekt bol rozdelený do piatich logických fáz:
-1.  **Fáza Analýzy a Návrhu:** Brainstorming, výber medzi projektmi, definovanie požiadaviek a prieskum vhodných komponentov a materiálov.
-2.  **Fáza Prototypovania s Ultrazvukom:** Objednávka prvej sady komponentov, prvé experimenty s Arduinom a testovanie ultrazvukového senzora ako pôvodne zamýšľaného riešenia.
-3.  **Fáza Pivotu a Nového Návrhu:** Identifikácia nedostatkov ultrazvukového senzora a prechod na spoľahlivejšiu metódu merania vodivosti vody.
-4.  **Fáza 3D Modelovania a Výroby:** Vytvorenie presného 3D modelu misky s priestorom pre elektroniku a jeho následná tlač z materiálu PETG+.
-5.  **Fáza Finálnej Montáže a Testovania:** Spájkovanie, integrácia všetkých komponentov do tela misky, finálne úpravy kódu a overenie funkčnosti celého systému.
+## 4. Postup Práce a Implementácia
 
-## 5. Detailný Postup Práce a Implementácia
+### 4.1. Prvé Experimenty a Prototypovanie
+Práca začala experimentovaním s hardvérom. Prvotný plán bol použiť ultrazvukový senzor na meranie hladiny vody. Zostavila som testovací obvod s Arduinom a senzorom na breadboarde, aby som overila jeho funkčnosť.
 
-### 5.1. Počiatočný Prieskum a Výber Komponentov
-Na začiatku som zvažovala dva nápady – samozavlažovací kvetináč a misku pre psa. Zvíťazila miska. Pre detekciu hladiny som sa rozhodla pre ultrazvukový senzor HC-SR04 ako lacnejšiu alternatívu k drahším bezkontaktným senzorom. Pre riadenie som zvolila populárny mikrokontrolér Arduino Nano.
+![Prvotné prototypovanie s Arduinom a senzormi](obrazky/prototyp-na-stole.jpg)
+*Obr. 4: Testovacie prostredie – Arduino, breadboard, ultrazvukový senzor a ďalšie komponenty.*
 
-![Prvé objednané komponenty](obrazky/komponenty.jpg)
-*Obr. 2: Prvá sada komponentov pripravená na experimentovanie (Arduino, ultrazvukový senzor, breadboard).*
+### 4.2. Zásadný Pivot a Finálny Návrh Elektroniky
+Počas testovania sa ukázal kľúčový problém: ultrazvukový senzor **nedokázal spoľahlivo merať hladinu cez stenu misky**. Preto som sa rozhodla pre radikálnu zmenu prístupu (**pivot**). Nové riešenie bolo založené na spoľahlivejšom **meraní vodivosti vody** pomocou dvoch sond. Na základe toho som navrhla finálnu a detailnú schému elektroniky.
 
-### 5.2. Prvý Experiment a Prekážka
-Po úspešnom rozbehaní základného "Blink" testu na Arduine som sa pustila do spájkovania. Bohužiaľ, pri tomto kroku som urobila chybu a zničila prvé Arduino. Bola to dôležitá lekcia, ktorá ma naučila trpezlivosti. Objednala som nové, už predpájkované Arduino, a úspešne som zapojila a otestovala ultrazvukový senzor.
+![Finálna schéma elektroniky (KiCad)](obrazky/schematic-kicad.png)
+*Obr. 5: Detailná schéma finálneho zapojenia, vrátane napájania, riadenia a senzorov.*
 
-### 5.3. Zásadný Pivot – Od Ultrazvuku k Vodivosti
-Počas testovania sa ukázal kľúčový problém: ultrazvukový senzor **nedokázal spoľahlivo merať hladinu cez hrubšiu stenu misky** z materiálu PETG. Signál bol príliš tlmený a merania neboli použiteľné.
-
-Po konzultácii som sa rozhodla pre radikálnu zmenu prístupu (**pivot**). Nové riešenie bolo založené na **meraní vodivosti vody**. Dve jednoduché kovové sondy sú umiestnené v miske. Ak je voda nad nimi, elektrický obvod je spojený. Ak voda klesne, obvod sa preruší. Tento stav je veľmi ľahko a spoľahlivo čitateľný analógovým pinom Arduina.
-
-![Schéma zapojenia vodivostného senzora](obrazky/schema.png)
-*Obr. 3: Finálna schéma zapojenia s použitím vodivostného senzora, navrhnutá v Tinkercad.*
-
-### 5.4. Finálny Kód
-Na základe nového prístupu som napísala a odladila finálny kód. Kód neustále monitoruje analógový pin `A0`. Ak nameraná hodnota klesne pod prahovú úroveň `60` (čo indikuje neprítomnosť vody), na PWM pine `D3` sa nastaví maximálna hodnota, ktorá aktivuje externý mechanizmus (čerpadlo).
+### 4.3. Finálny Kód
+S novým hardvérovým návrhom som finalizovala aj kód pre Arduino. Kód neustále monitoruje analógový pin pripojený k sondám. Ak hodnota klesne pod prahovú úroveň (voda chýba), aktivuje pin, ktorý spína čerpadlo.
 
 ```cpp
 // Definovanie pinov
@@ -77,16 +69,20 @@ void loop() {
   delay(500);
 }
 ```
-### 5.5. 3D Model, Tlač a Montáž
-Paralelne s prácou na elektronike bol vytvorený 3D model misky. Model bol navrhnutý tak, aby mal oddelený priestor pre elektroniku a batériu. Ako materiál pre tlač bol zvolený **PETG+**, ktorý je známy svojou odolnosťou a bezpečnosťou pre styk s potravinami. Po tlači som plánovala povrch vyhladiť a ošetriť epoxidom pre dokonalú hygienu.
+### 4.4. 3D Modelovanie a Príprava na Tlač
+Na základe nákresov a finálnych rozmerov elektroniky som vytvorila detailný 3D model misky. Model sa skladá z troch častí: vnútornej misky, vonkajšieho dekoratívneho plášťa a spodného krytu, ktorý chráni elektroniku.
 
-![3D model misky pred tlačou](obrazky/3d_model.png)
-*Obr. 4: Vizualizácia finálneho 3D modelu misky.*
+![3D model misky v rozpade](obrazky/3d-model-rozpad.png)
+*Obr. 6: Explodovaný pohľad na jednotlivé časti 3D modelu.*
 
-Po úspešnej tlači nasledovala finálna montáž – spájkovanie všetkých komponentov na pevno a ich umiestnenie do tela misky.
+![Pohľady na zložený 3D model](obrazky/3d-model-pohlady.png)
+*Obr. 7: Finálny 3D model z rôznych uhlov pohľadu pripravený na 3D tlač.*
 
-![Hotový a funkčný prototyp misky](obrazky/finalny_produkt.jpg)
-*Obr. 5: Finálny produkt – funkčná automatická miska pripravená na použitie.*
+### 4.5. Výsledný Produkt
+Po vytlačení všetkých častí a finálnej montáži elektroniky vznikol plne funkčný prototyp, ktorý spĺňa všetky pôvodné požiadavky.
 
-## 6. Záver a Získané Skúsenosti
-Projekt úspešne splnil všetky stanovené ciele a výsledkom je plne funkčný prototyp automatickej misky. Počas práce som si osvojila širokú škálu zručností – od návrhu elektronických obvodov a programovania mikrokontrolérov, cez 3D modelovanie a tlač, až po praktické spájkovanie. Najdôležitejším poznatkom však bola dôležitosť flexibility a schopnosti zmeniť pôvodný plán, keď sa ukáže ako nefunkčný. Schopnosť urobiť "pivot" a nájsť jednoduchšie a robustnejšie riešenie bola kľúčom k úspešnému dokončeniu projektu.
+![Hotový a funkčný prototyp misky](obrazky/finalny-produkt.jpg)
+*Obr. 8: Finálny produkt – funkčná automatická miska pripravená na použitie. (Sem vlož fotku reálneho produktu)*
+
+## 5. Záver a Získané Skúsenosti
+Projekt úspešne splnil všetky stanovené ciele. Počas práce som si osvojila širokú škálu zručností – od návrhu elektronických obvodov, cez programovanie mikrokontrolérov, až po 3D modelovanie a tlač. Najdôležitejším poznatkom bola dôležitosť flexibility a schopnosti urobiť "pivot", keď sa pôvodný plán ukáže ako nefunkčný.
