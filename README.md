@@ -57,6 +57,7 @@ void loop() {
   analogWrite(controlPWM, u);
   delay(500);
 }
+```
 ### Krok 3: 3D Tlač a Montáž
 Miska bola namodelovaná a vytlačená z materiálu PETG+. Následne bola elektronika finálne spájkovaná a integrovaná do tela misky.
 
