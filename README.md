@@ -27,21 +27,41 @@ Na začiatku projektu som si stanovila nasledujúce kľúčové ciele:
 *   **Bezpečnosť a Hygiena:** Miska musí byť vyrobená z materiálu bezpečného pre styk s potravinami (food-safe).
 *   **Samostatnosť:** Zariadenie má byť napájané z batérie, aby bolo prenosné a bezpečné.
 
-## 4. Postup Práce a Implementácia
+## 4. Návrh Systému a Architektúra (Sparx EA)
+Pre lepšie pochopenie štruktúry a funkčnosti systému som v nástroji Sparx Enterprise Architect vytvorila logický a fyzický model. Tieto diagramy pomohli definovať komponenty, ich zodpovednosti a vzájomné prepojenia ešte pred samotnou implementáciou.
 
-### 4.1. Prvé Experimenty a Prototypovanie
+**Celý model si môžete stiahnuť a otvoriť priamo v Enterprise Architect:**
+*   **[Stiahnuť Sparx EA model (MiskaPrePsa.qea)](MiskaPrePsa.qea)**
+
+---
+
+### Fyzický Model
+Fyzický model zobrazuje konkrétne hardvérové komponenty, z ktorých sa systém skladá, a ich prepojenie. Identifikuje hlavné časti ako Arduino, senzor, ovládač motora (MOSFET) a samotnú pumpu.
+
+<img src="obrazky/fyzicky_model.png" alt="Fyzický model komponentov" width="700">
+*Obr.: Fyzický model hardvérových komponentov a ich prepojení.*
+
+### Logický Model (Štruktúra Kódu)
+Logický model sa zameriava na softvérovú architektúru. Definuje hlavné triedy a ich metódy, ako napríklad `MiskaController`, `PumpaController` a `SenzorHladiny`, a ukazuje, ako spolu komunikujú.
+
+<img src="obrazky/logicky_model.png" alt="Logický model a štruktúra kódu" width="700">
+*Obr.: Logický model definujúci štruktúru softvéru.*
+
+## 5. Postup Práce a Implementácia
+
+### 5.1. Prvé Experimenty a Prototypovanie
 Práca začala experimentovaním s hardvérom. Prvotný plán bol použiť ultrazvukový senzor na meranie hladiny vody. Zostavila som testovací obvod s Arduinom a senzorom na breadboarde, aby som overila jeho funkčnosť.
 
 <img src="obrazky/prototyp-na-stole.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 4: Testovacie prostredie – Arduino, breadboard, ultrazvukový senzor a ďalšie komponenty.*
 
-### 4.2. Zásadný Pivot a Finálny Návrh Elektroniky
+### 5.2. Zásadný Pivot a Finálny Návrh Elektroniky
 Počas testovania sa ukázal kľúčový problém: ultrazvukový senzor **nedokázal spoľahlivo merať hladinu cez stenu misky**. Preto som sa rozhodla pre radikálnu zmenu prístupu (**pivot**). Nové riešenie bolo založené na spoľahlivejšom **meraní vodivosti vody** pomocou dvoch sond. Na základe toho som navrhla finálnu a detailnú schému elektroniky.
 
 <img src="obrazky/schematic-kicad.png" alt="Vizuálna inšpirácia" width="500">
 *Obr. 5: Detailná schéma finálneho zapojenia, vrátane napájania, riadenia a senzorov.*
 
-### 4.3. Finálny Kód
+### 5.3. Finálny Kód
 S novým hardvérovým návrhom som finalizovala aj kód pre Arduino. Kód neustále monitoruje analógový pin pripojený k sondám. Ak hodnota klesne pod prahovú úroveň (voda chýba), aktivuje pin, ktorý spína čerpadlo.
 
 ```cpp
@@ -69,7 +89,7 @@ void loop() {
   delay(500);
 }
 ```
-### 4.4. 3D Modelovanie a Príprava na Tlač
+### 5.4. 3D Modelovanie a Príprava na Tlač
 Na základe nákresov a finálnych rozmerov elektroniky som vytvorila detailný 3D model misky. Model sa skladá z troch častí: vnútornej misky, vonkajšieho dekoratívneho plášťa a spodného krytu, ktorý chráni elektroniku.
 
 <img src="obrazky/3d-model-rozpad.png" alt="Vizuálna inšpirácia" width="500">
@@ -78,11 +98,11 @@ Na základe nákresov a finálnych rozmerov elektroniky som vytvorila detailný 
 <img src="obrazky/3d-model-pohlady.png" alt="Vizuálna inšpirácia" width="500">
 *Obr. 7: Finálny 3D model z rôznych uhlov pohľadu pripravený na 3D tlač.*
 
-### 4.5. Výsledný Produkt
+### 5.5. Výsledný Produkt
 Po vytlačení všetkých častí a finálnej montáži elektroniky vznikol plne funkčný prototyp, ktorý spĺňa všetky pôvodné požiadavky.
 
 <img src="obrazky/finalny-produkt.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 8: Finálny produkt – funkčná automatická miska pripravená na použitie. (Sem vlož fotku reálneho produktu)*
 
-## 5. Záver a Získané Skúsenosti
+## 6. Záver a Získané Skúsenosti
 Projekt úspešne splnil všetky stanovené ciele. Počas práce som si osvojila širokú škálu zručností – od návrhu elektronických obvodov, cez programovanie mikrokontrolérov, až po 3D modelovanie a tlač. Najdôležitejším poznatkom bola dôležitosť flexibility a schopnosti urobiť "pivot", keď sa pôvodný plán ukáže ako nefunkčný.
