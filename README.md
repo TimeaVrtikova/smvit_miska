@@ -17,7 +17,7 @@ Primárnou motiváciou pre tento projekt bola praktická potreba mojej sestry. C
 
 Na základe tejto predstavy som začala pracovať na vlastných nákresoch, kde som rozpracovala základný tvar misky, umiestnenie elektroniky, napájania (USB-C) a princíp fungovania.
 
-![Prvé nákresy a koncepty](obrazky/nakresy.jpg) ![Detailné nákresy pohľadov](obrazky/nakresy-detailne.jpg)
+<img src="obrazky/nakresy.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 2 a 3: Moje vlastné počiatočné nákresy a detailnejšie rozpracovanie dizajnu.*
 
 ## 3. Ciele Projektu
@@ -32,13 +32,13 @@ Na začiatku projektu som si stanovila nasledujúce kľúčové ciele:
 ### 4.1. Prvé Experimenty a Prototypovanie
 Práca začala experimentovaním s hardvérom. Prvotný plán bol použiť ultrazvukový senzor na meranie hladiny vody. Zostavila som testovací obvod s Arduinom a senzorom na breadboarde, aby som overila jeho funkčnosť.
 
-![Prvotné prototypovanie s Arduinom a senzormi](obrazky/prototyp-na-stole.jpg)
+<img src="obrazky/prototyp-na-stole.jpg" alt="Vizuálna inšpirácia" width="500">
 *Obr. 4: Testovacie prostredie – Arduino, breadboard, ultrazvukový senzor a ďalšie komponenty.*
 
 ### 4.2. Zásadný Pivot a Finálny Návrh Elektroniky
 Počas testovania sa ukázal kľúčový problém: ultrazvukový senzor **nedokázal spoľahlivo merať hladinu cez stenu misky**. Preto som sa rozhodla pre radikálnu zmenu prístupu (**pivot**). Nové riešenie bolo založené na spoľahlivejšom **meraní vodivosti vody** pomocou dvoch sond. Na základe toho som navrhla finálnu a detailnú schému elektroniky.
 
-![Finálna schéma elektroniky (KiCad)](obrazky/schematic-kicad.png)
+<img src="obrazky/schematic-kicad.png" alt="Vizuálna inšpirácia" width="500">
 *Obr. 5: Detailná schéma finálneho zapojenia, vrátane napájania, riadenia a senzorov.*
 
 ### 4.3. Finálny Kód
@@ -72,10 +72,10 @@ void loop() {
 ### 4.4. 3D Modelovanie a Príprava na Tlač
 Na základe nákresov a finálnych rozmerov elektroniky som vytvorila detailný 3D model misky. Model sa skladá z troch častí: vnútornej misky, vonkajšieho dekoratívneho plášťa a spodného krytu, ktorý chráni elektroniku.
 
-![3D model misky v rozpade](obrazky/3d-model-rozpad.png)
+<img src="obrazky/3d-model-rozpad.png" alt="Vizuálna inšpirácia" width="500">
 *Obr. 6: Explodovaný pohľad na jednotlivé časti 3D modelu.*
 
-![Pohľady na zložený 3D model](obrazky/3d-model-pohlady.png)
+<img src="obrazky/3d-model-pohlady.png" alt="Vizuálna inšpirácia" width="500">
 *Obr. 7: Finálny 3D model z rôznych uhlov pohľadu pripravený na 3D tlač.*
 
 ### 4.5. Výsledný Produkt
